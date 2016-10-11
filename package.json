@@ -11,7 +11,7 @@
     "dopublish": "tnpm run build && tnpm publish"
   },
   "dependencies": {
-    "antd": "1.11.1",
+    "antd": "^2.0.1",
     "es3ify-loader": "^0.1.0",
     "react-router": "^2.8.x",
     "qwest": "~4.3.2"

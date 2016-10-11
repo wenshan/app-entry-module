@@ -1,4 +1,5 @@
-var utils = {
+'use strict';
+var Utils = {
     merge: function () {
         const ret = {};
         const args = [].slice.call(arguments, 0);
@@ -8,8 +9,12 @@ var utils = {
             });
         });
         return ret;
+    },
+    cookie_get: function(key){
+	    var REGEX_KEY = new RegExp(key + '=([^;]+)', 'i');
+	    return  document.cookie.match(REGEX_KEY)[1];
     }
 };
 
 
-module.exports = utils;
+module.exports = Utils;

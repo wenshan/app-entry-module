@@ -1,5 +1,4 @@
 'use strict';
-
 import qwest from "qwest";
 import {notification} from 'antd';
 import utils from './common.js';
@@ -23,22 +22,29 @@ const adapter = function (data) {
     return data;
 };
 
+const token = function (){
+    let key = 'com.gooagoo.passpart.sso.token.name';
+    return utils.cookie_get(key);
+};
+
 const defaultOptions = {
     method: 'post',
-    data: {},
+    data: {
+        'token': token()
+    },
     type: 'json',
     adapter: adapter,//resultDTO解析方法
     alertError: true,//是否弹出错误提示窗口
     alertDenyAccess: false,//是否弹出没有权限提示窗口
     parallel: false,//是否并行发送批量请求
     isSuccess: function (xhr, resp) {//自定义逻辑判断是否成功
-        return resp.success === true;
+        return resp.status === 'S';
     },
     isAccessDeny: function (xhr, resp) {//判断是否没有权限
         return resp.statusCode == '403' && resp.data
     },
     getAuthUrl: function (xhr, resp) {//获取授权url
-        return resp.data.replace('&amp;', '&');
+        return 'https://passport.gooagoo.com/index.html';
     }
 };
 
@@ -71,7 +77,7 @@ const fetchMany = function (options) {
     })
 };
 
-const fetch = function (options) {
+const Fetch = function (options) {
     options = utils.merge({}, defaultOptions, options);
     let {parallel=false} = options;
     // 并行的请求
@@ -116,4 +122,4 @@ const fetch = function (options) {
     })
 };
 
-module.exports = fetch;
+module.exports = Fetch;

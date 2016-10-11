@@ -1,9 +1,9 @@
 import common from './common';
 import ajax from './fetch';
 
-const utils = {
+const Utils = {
     common: common,
     ajax: ajax
 };
 
-module.exports = utils;
+module.exports = Utils;

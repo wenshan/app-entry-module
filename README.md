@@ -1,1 +1,1 @@
-cupid
+#app-entry-module
